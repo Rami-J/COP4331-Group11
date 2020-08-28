@@ -1,0 +1,25 @@
+Meeting time: 8:30 pm
+Meeting location: Voice call on Discord
+Members Present: Ahmad, Rami, Sam, Shaneal, Troy
+
+Hosting - Trying out Azure (since we have free access). If it doesn't work out, we'll default to the GoDaddy option
+
+Roles:
+Database: Rami
+API: Troy, Shaneal
+Front End: Sam
+Project Manager: Ahmad
+
+User Information:
+- Username
+- Password
+- Security Question
+- Security Question answer
+
+Contact Information:
+- First name
+- Last name
+- Phone number
+- Email address
+- Age
+- Favorite food/color?
