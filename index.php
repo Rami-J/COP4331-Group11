@@ -16,6 +16,7 @@
 	<input type="password" id="loginPassword" placeholder="Password"/><br />
 	<button type="button" id="loginButton" class="buttons" onclick="doLogin();"> Do It </button>
 	<span id="loginResult"></span>
+
 </div>
 
 </body>
