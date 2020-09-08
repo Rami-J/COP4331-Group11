@@ -15,8 +15,8 @@
 	$lastName = "";
 	
 	// Retrieve field from JSON file
-	$login = $inputData["login"];
-	$password = $inputData["password"];
+	$login = trimString($inputData["login"]);
+	$password = trimString($inputData["password"]);
 	
 
 	// Connect to database
@@ -82,5 +82,17 @@
 		$retValue = '{"userId":' . $userId . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","error":""}';
 		sendJson( $retValue );
 	}
+
+	// Return string without whitespace and semi colons
+	function trimString( $string )
+	{
+		$string = trim($string);
+		$string = str_replace('"', '', $string);
+		$string = str_replace("'", '', $string);
+		$string = str_replace(';', '', $string);
+		return $string;
+	}
+	
+
 ?>
 
