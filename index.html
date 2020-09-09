@@ -15,7 +15,14 @@
 	<input type="text" id="loginName" placeholder="Username" /><br />
 	<input type="password" id="loginPassword" placeholder="Password"/><br />
 	<button type="button" id="loginButton" class="buttons" onclick="doLogin();"> Do It </button>
-	<span id="loginResult"></span>
+	<span id="loginResult"></span>	
+	<button type="button" id="signInButton" class="buttons"> Dont' have an account? Sign Up </button>
+	<script type="text/javascript">
+		document.getElementById("signInButton").onclick = "doSignUp();" 
+		{
+			location.href = "https://cop4331-group11.team/createaccount.html"; 
+		};
+	</script>
 
 </div>
 

@@ -68,6 +68,8 @@
 	// Return in the case of an error
 	function returnError( $err )
 	{
+		// return user name and error
+		$retValue = '{"username":"","error":"' . $err . '"}';
 		sendJson( $retValue );
 	}
 

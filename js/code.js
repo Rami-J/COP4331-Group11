@@ -53,6 +53,54 @@ function doLogin()
 
 }
 
+function doSignUp()
+{
+	username = "";
+	password = "";
+	
+	var username = document.getElementById("username").value;
+	var password = document.getElementById("password").value;
+//	var hash = md5( password );
+	
+	document.getElementById("signInResult").innerHTML = "";
+
+	var jsonPayload = '{"username" : "' + username + '", "password" : "' + password + '"}';
+	var url = urlBase + '/add_user.' + extension;
+
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, false);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
+	{
+		xhr.send(jsonPayload);
+		
+		console.log(xhr.responseText);
+		var jsonObject = JSON.parse( xhr.responseText );
+		
+		userId = jsonObject.userId;
+		
+		if( userId > 1 )
+		{
+			document.getElementById("signInResult").innerHTML = "Username already exists";
+			return;
+		}
+		else
+		{
+			document.getElementById("signInResult").innerHTML = "Created Account";
+			return;
+		}
+
+		saveCookie();
+	
+		window.location.href = "color.html";
+	}
+	catch(err)
+	{
+		document.getElementById("signInResult").innerHTML = err.message;
+	}
+
+}
+
 function saveCookie()
 {
 	var minutes = 20;
