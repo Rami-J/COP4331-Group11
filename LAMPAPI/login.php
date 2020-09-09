@@ -2,11 +2,11 @@
 
 	$inputData = getLoginInfo();
 
-	// Get database name
+	// Get database name	
 	$serverName = "localhost";
-	$databaseUsername = "group11";
+	$databaseUsername = "rami_group11";
 	$databasePassword = "Wearegroup11!";
-	$databaseName = "cop4331";
+	$databaseName = "rami_cop4331";
 
 	// Memset fields to zero
 	$userId = 0;
@@ -18,7 +18,6 @@
 	$login = trimString($inputData["login"]);
 	$password = trimString($inputData["password"]);
 	
-
 	// Connect to database
 	$connection = new mysqli($serverName, $databaseUsername, $databasePassword, $databaseName);
 	if ($connection->connectError)
@@ -29,7 +28,7 @@
 	else
 	{
 		// Send the query to the database.
-		$sql = "SELECT userId, firstName, lastName FROM user WHERE login = '" . $login . "' AND password = '" . $password . "'";
+		$sql = "SELECT userId, firstName, lastName FROM User WHERE login = '" . $login . "' AND password = '" . $password . "'";
 		$result = $connection->query($sql);
 
 		// If the number of rows fetched is positive, get the user's id, first name, and last name.
@@ -95,4 +94,3 @@
 	
 
 ?>
-
