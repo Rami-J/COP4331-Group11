@@ -35,7 +35,7 @@
 		if ($result->num_rows > 0)
 		{
 			$error = true;
-			returnError( "User" );
+			returnError( "Username already exists" );
 		}
 		// We found a unique username
 		else
@@ -49,13 +49,7 @@
 		}		
 		$connection->close();
 	}
-	
-	// Return the user's first name, last name, and userid as JSON.
-	if (!$error)
-	{
-		returnInfo($firstName, $lastName, $userId);
-	}
-	
+
 	/* Functions */
 
 	// Parse JSON file input
