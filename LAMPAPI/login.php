@@ -15,16 +15,16 @@
 	$lastName = "";
 	
 	// Retrieve field from JSON file
-	$login = trimString($inputData["login"]);
-	$password = trimString($inputData["password"]);
+	$login = $inputData["login"];
+	$password = $inputData["password"];
 	
 
 	// Connect to database
 	$connection = new mysqli($serverName, $databaseUsername, $databasePassword, $databaseName);
-	if ($connection->connect_error)
+	if ($connection->connectError)
 	{
 		$error = true;
-		returnError($connection->connect_error);
+		returnError($connection->connectError);
 	}
 	else
 	{
@@ -82,17 +82,5 @@
 		$retValue = '{"userId":' . $userId . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","error":""}';
 		sendJson( $retValue );
 	}
-
-	// Return string without whitespace and semi colons
-	function trimString( $string )
-	{
-		$string = trim($string);
-		$string = str_replace('"', '', $string);
-		$string = str_replace("'", '', $string);
-		$string = str_replace(';', '', $string);
-		return $string;
-	}
-	
-
 ?>
 
