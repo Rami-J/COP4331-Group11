@@ -1,5 +1,5 @@
 <?php
-// 	header("Access-Control-Allow-Headers: Content-type");
+	header("Access-Control-Allow-Headers: Content-type");
 	header("Access-Control-Allow-Origin: http://cop4331-group11.team");
 	$inputData = getLoginInfo();
 
