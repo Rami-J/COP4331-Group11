@@ -21,10 +21,10 @@
 
 	// Connect to database
 	$connection = new mysqli($serverName, $databaseUsername, $databasePassword, $databaseName);
-	if ($connection->connectError)
+	if ($connection->connect_error)
 	{
 		$error = true;
-		returnError($connection->connectError);
+		returnError($connection->connect_error);
 	}
 	else
 	{
