@@ -1,0 +1,63 @@
+body {
+	background-color: #354182;
+}
+.card {
+	background-color: #354182;
+}
+.card:hover {
+	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+#headerJumbotron{
+	width:100vw;
+    height: 1vh;
+	position:absolute;
+	top:0%;
+	left:0%;
+	background-color: #A6D4FF;
+}
+#bodyJumbotron{
+	width:100vw;
+    height: 100vh;
+	position:absolute;
+	top:0%;
+	left:0%;
+	background-color: #354182;
+}
+#logoutButton {
+	background-color: #FF4F4F;
+	position:absolute;
+	left:92%;
+	top: 30%;
+}
+#logoutButton:hover {
+ 	background-color: #1C255F;
+ 	color: white;
+	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+#addContactCard {
+	position: absolute;
+	width: 20vw;
+	height: 20vh;
+	top:25%;
+}
+#searchContactCard {
+	position: absolute;
+	width: 20vw;
+	height: 20vh;
+	top:25%;
+	left: 27%;
+}
+#updateContactCard {
+	position: absolute;
+	width: 20vw;
+	height: 20vh;
+	top:25%;
+	left: 52%;
+}
+#deleteContactCard {
+	position: absolute;
+	width: 20vw;
+	height: 20vh;
+	top:25%;
+	left: 77%;
+}
