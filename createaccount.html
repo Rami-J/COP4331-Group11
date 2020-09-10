@@ -1,33 +1,61 @@
 
 <html>
 <head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width = device-width, initial-scale=1">
 	<title>COP 4331 LAMP Stack Demo</title>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<script type="text/javascript" src="js/md5.js"></script>
 	<script type="text/javascript" src="js/code.js"></script>
-    <link href="css/styles.css" rel="stylesheet">	
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link href="css/signup_styles.css" rel="stylesheet">	
 </head>
 <body>
-
-<h1 id="title">COP 4331 LAMP Stack Demo</h1>
-
-<div id="signUpDiv">
-	<span id="inner-title">SIGN UP</span>
-	<input type="username" id="username" placeholder="username" /><br />
-	<input type="password" id="password" placeholder="password"/><br />
-	<button type="button" id="signInButton" class="buttons" onclick="doSignUp();">Sign Up </button>
-	<span id="signInResult"></span>	
-	<button type="button" id="returnButton" class="buttons">Return </button>
-	
+	<div class="container" id="container">
+	<div class="jumbotron">
+	<img src="images/blue.jpg">
+	<div id="signUpDiv">
+	<h4>SIGN UP</h4>
+	<div class="textbox">
+		<svg width="1em" height="1em" viewBox="0 0 12 16" class="bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+			<path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+		</svg>
+		<input type="text" id="firstName" placeholder="First Name" /><br />
+	</div>
+	<div class="textbox">
+		<svg width="1em" height="1em" viewBox="0 0 12 16" class="bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+			<path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+		  </svg>
+		  <input type="text" id="lastName" placeholder="Last Name" /><br />
+	</div>
+	<div class="textbox">
+		<svg width="1em" height="1em" viewBox="0 0 12 16" class="bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+			<path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+		</svg>
+		<input type="username" id="username" placeholder="username" /><br />
+	</div>
+	<div class="textbox">
+		<svg width="1em" height="1em" viewBox="0 0 12 16" class="bi bi-lock-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+			<path d="M2.5 9a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2V9z"/>
+			<path fill-rule="evenodd" d="M4.5 4a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z"/>
+		</svg>
+		<input type="password" id="password" placeholder="password"/><br />
+	</div>
+	<button type="button" id="signInButton" class="btn btn-default btn-lg" onclick="doSignUp();">Sign Up </button>
+	<button type="button" id="returnButton" class="btn btn-default btn-lg">Return </button>
 	<script type="text/javascript">
 		document.getElementById("returnButton").onclick= function () 
 		{
 			location.href = "index.html";
 		};
 	</script>
-
+	<span style="font-weight:bold" id="signInResult"></span>	
 
 </div>
+</div>
+</div>
 
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 </body>
 </html>
