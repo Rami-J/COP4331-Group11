@@ -55,16 +55,19 @@ function doLogin()
 
 function doSignUp()
 {
-	username = "";
+	login = "";
 	password = "";
 	
-	var username = document.getElementById("username").value;
+	firstName = document.getElementById("firstName").value;
+	lastName = document.getElementById("lastName").value;
+	var login = document.getElementById("username").value;
 	var password = document.getElementById("password").value;
+	
 //	var hash = md5( password );
 	
 	document.getElementById("signInResult").innerHTML = "";
 
-	var jsonPayload = '{"username" : "' + username + '", "password" : "' + password + '"}';
+	var jsonPayload = '{"firstName" : "' + firstName + '", "lastName" : "' + lastName + '", "login" : "' + login + '", "password" : "' + password + '"}';
 	var url = urlBase + '/add_user.' + extension;
 
 	var xhr = new XMLHttpRequest();
@@ -79,9 +82,9 @@ function doSignUp()
 		
 		userId = jsonObject.userId;
 		
-		if( userId > 0 )
+		if( userId <= 0 )
 		{
-			document.getElementById("signInResult").innerHTML = "Username already exists";
+			document.getElementById("signInResult").innerHTML = jsonObject.error;
 			return;
 		}
 		else
