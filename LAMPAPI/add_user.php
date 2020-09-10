@@ -1,12 +1,13 @@
 <?php
+	header("Access-Control-Allow-Headers: Content-type");
+	header("Access-Control-Allow-Origin: http://cop4331-group11.team");
+	$inputData = getSignUpInfo();
 
-	$inputData = getLoginInfo();
-
-	// Get database name
+	// Get database name	
 	$serverName = "localhost";
-	$databaseUsername = "group11";
+	$databaseUsername = "rami_group11";
 	$databasePassword = "Wearegroup11!";
-	$databaseName = "cop4331";
+	$databaseName = "rami_cop4331";
 
 	// Memset fields to zero
 	$error = false;
@@ -44,7 +45,7 @@
 			if( $result = $connection->query($sql) != TRUE )
 			{
 				$error = true;
-				returnWithError( $connection->error );
+				returnError( $connection->error );
 			}
 		}		
 		$connection->close();
@@ -53,7 +54,7 @@
 	/* Functions */
 
 	// Parse JSON file input
-	function getLoginInfo()
+	function getSignUpInfo()
 	{
 		return json_decode(file_get_contents('php://input'), true);
 	}
@@ -69,7 +70,7 @@
 	function returnError( $err )
 	{
 		// return user name and error
-		$retValue = '{"username":"","error":"' . $err . '"}';
+		$retValue = '{"username":" ","error":"' . $err . '"}';
 		sendJson( $retValue );
 	}
 

@@ -79,7 +79,7 @@ function doSignUp()
 		
 		userId = jsonObject.userId;
 		
-		if( userId > 1 )
+		if( userId > 0 )
 		{
 			document.getElementById("signInResult").innerHTML = "Username already exists";
 			return;
@@ -87,7 +87,6 @@ function doSignUp()
 		else
 		{
 			document.getElementById("signInResult").innerHTML = "Created Account";
-			return;
 		}
 
 		saveCookie();
