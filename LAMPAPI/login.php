@@ -1,6 +1,6 @@
 <?php
 	header("Access-Control-Allow-Headers: Content-type");
-	header("Access-Control-Allow-Origin: http://cop4331-group11.team");
+	header("Access-Control-Allow-Origin: *");
 	$inputData = getLoginInfo();
 
 	// Get database name	
