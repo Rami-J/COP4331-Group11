@@ -11,7 +11,7 @@
 
 	// Memset fields to zero
 	$error = false;
-    $userId = 0;
+    	$userId = 0;
 	$contactId = 0;
 	$firstName = "";
 	$lastName = "";
@@ -51,12 +51,12 @@
 	else
 	{
 		// Send the query to the database.
-        $sql = "INSERT into Contact (userId, firstName, lastName, phoneNumber, email, notes) VALUES ('" . $userId . "', '" . $firstName . "', '" . $lastName . "','" . $phoneNumber . "','" . $email . "','" . $notes . "')";
-			if( $result = $connection->query($sql) != TRUE )
-			{
-				$error = true;
-				returnError( $connection->error );
-			}
+		$sql = "INSERT into Contact (userId, firstName, lastName, phoneNumber, email, notes) VALUES ('" . $userId . "', '" . $firstName . "', '" . $lastName . "','" . $phoneNumber . "','" . $email . "','" . $notes . "')";
+		if( $result = $connection->query($sql) != TRUE )
+		{
+			$error = true;
+			returnError( $connection->error );
+		}
 		$connection->close();
 	}
 
