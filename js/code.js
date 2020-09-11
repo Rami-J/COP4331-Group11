@@ -44,7 +44,7 @@ function doLogin()
 
 		saveCookie();
 	
-		window.location.href = "color.html";
+		window.location.href = "dashboard.html";
 	}
 	catch(err)
 	{
