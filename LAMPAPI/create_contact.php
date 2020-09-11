@@ -11,7 +11,7 @@
 
 	// Memset fields to zero
 	$error = false;
-    	$userId = 0;
+    $userId = 0;
 	$contactId = 0;
 	$firstName = "";
 	$lastName = "";
@@ -23,6 +23,7 @@
 	$lastName = trimString($inputData["lastName"]);
 	$phoneNumber = trimString($inputData["phoneNumber"]);
 	$email = trimString($inputData["email"]);
+	$address = trimString($inputData["address"]);
 	$userId = trimString($inputData["userId"]);
 	$notes = trimString($inputData["notes"]);
 
@@ -51,13 +52,24 @@
 	else
 	{
 		// Send the query to the database.
-		$sql = "INSERT into Contact (userId, firstName, lastName, phoneNumber, email, notes) VALUES ('" . $userId . "', '" . $firstName . "', '" . $lastName . "','" . $phoneNumber . "','" . $email . "','" . $notes . "')";
+        $sql = "INSERT INTO Contact (firstName, lastName, email, address, phoneNumber, notes, dateRecordCreated, userId)
+				VALUES ('" . $firstName . "', '" . $lastName . "', '" . $email . "','" . $address . "','" . $phoneNumber . "','" . $notes . "'," . "CURDATE()," . $userId . ")";
+
 		if( $result = $connection->query($sql) != TRUE )
 		{
 			$error = true;
 			returnError( $connection->error );
 		}
+
+		$sql = "SELECT contactId FROM Contact WHERE userId = " . $userId . " AND firstName = '" . $firstName . "' AND lastName = '" . $lastName . "'";
+		$result = $connection->query($sql);
+		$contactId = ($result->fetch_assoc())["contactId"];
 		$connection->close();
+	}
+
+	if (!$error)
+	{
+		returnInfo($contactId);
 	}
 
 	/* Functions */
@@ -74,12 +86,18 @@
 		header('Content-type: application/json');
 		echo $obj;
 	}
+
+	function returnInfo($contactId)
+	{
+		$retValue = '{"contactId":' . $contactId . ',"error":""}';
+		sendJSON( $retValue );
+	}
 	
 	// Return in the case of an error
 	function returnError( $err )
 	{
 		// return user name and error
-		$retValue = '{"username":" ","error":"' . $err . '"}';
+		$retValue = '{"contactId":0, "error":"' . $err . '"}';
 		sendJson( $retValue );
 	}
 
@@ -100,7 +118,7 @@
 		if (!empty($phoneNumber)) 
 		{
 			$isMobileNumberValid = TRUE;
-			if (!preg_match("/^[+]?[1-9][0-9]{9}$/", $phoneNumber)) 
+			if (!preg_match("/^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/", $phoneNumber))
 			{
 				$isMobileNumberValid = FALSE;
 			}
@@ -115,7 +133,7 @@
 		if (!empty($email)) 
 		{
 			$isEmailValid = TRUE;
-			if (!preg_match("^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$", $email)) 
+			if (!preg_match("/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/", $email)) 
 			{
 				$isEmailValid = FALSE;
 			}
