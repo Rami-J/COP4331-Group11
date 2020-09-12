@@ -11,7 +11,7 @@
 
 	// Memset fields to zero
 	$error = false;
-	$userId = 0;
+    	$userId = 0;
 	$contactId = 0;
 	$firstName = "";
 	$lastName = "";
