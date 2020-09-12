@@ -1,7 +1,7 @@
 <?php
 	header("Access-Control-Allow-Headers: Content-type");
 	header("Access-Control-Allow-Origin: http://cop4331-group11.team");
-	$inputData = getContactInfo();
+	$inputData = getCreateContactInfo();
 
 	// Get database name	
 	$serverName = "localhost";
@@ -11,7 +11,7 @@
 
 	// Memset fields to zero
 	$error = false;
-    $userId = 0;
+    	$userId = 0;
 	$contactId = 0;
 	$firstName = "";
 	$lastName = "";
@@ -19,12 +19,12 @@
 	$phoneNumber = "";
 
 	// Retrieve field from JSON file
+	$userId = trimString($inputData["userId"]);
 	$firstName = trimString($inputData["firstName"]);
 	$lastName = trimString($inputData["lastName"]);
 	$phoneNumber = trimString($inputData["phoneNumber"]);
 	$email = trimString($inputData["email"]);
 	$address = trimString($inputData["address"]);
-	$userId = trimString($inputData["userId"]);
 	$notes = trimString($inputData["notes"]);
 
 	// Connect to database
@@ -39,12 +39,12 @@
 		$error = true;
 		returnError("Please enter a first/last name of contact to add.");
 	}
-	else if (!validatePhoneNumber( $phoneNumber ))
+	else if (validatePhoneNumber( $phoneNumber ) === FALSE)
 	{
 		$error = true;
-		returnError("Please enter a valid phone number of the contact");
+		returnError("Please enter a valid phone number of the contact in the format XXX-XXX-XXXX");
 	}
-	else if (!validateEmail( $email ))
+	else if (!filter_var( $email, FILTER_VALIDATE_EMAIL) )
 	{
 		$error = true;
 		returnError("Please enter a valid email address of the contact");
@@ -53,7 +53,7 @@
 	{
 		// Send the query to the database.
         $sql = "INSERT INTO Contact (firstName, lastName, email, address, phoneNumber, notes, dateRecordCreated, userId)
-				VALUES ('" . $firstName . "', '" . $lastName . "', '" . $email . "','" . $address . "','" . $phoneNumber . "','" . $notes . "'," . "CURDATE()," . $userId . ")";
+				VALUES ('" . $firstName . "', '" . $lastName . "','" . $email . "','" . $address . "','" . $phoneNumber . "','" . $notes . "', CURDATE(),'" . $userId . "')";
 
 		if( $result = $connection->query($sql) != TRUE )
 		{
@@ -61,21 +61,23 @@
 			returnError( $connection->error );
 		}
 
-		$sql = "SELECT contactId FROM Contact WHERE userId = " . $userId . " AND firstName = '" . $firstName . "' AND lastName = '" . $lastName . "'";
+		$sql = "SELECT contactId FROM Contact WHERE userId = '" . $userId . "' AND firstName = '" . $firstName . "' AND lastName = '" . $lastName . "'";
 		$result = $connection->query($sql);
 		$contactId = ($result->fetch_assoc())["contactId"];
+
+
 		$connection->close();
 	}
 
 	if (!$error)
 	{
-		returnInfo($contactId);
+		returnInfo($userId, $firstName, $lastName, $phoneNumber, $email, $notes );
 	}
 
 	/* Functions */
 
 	// Parse JSON file input
-	function getContactInfo()
+	function getCreateContactInfo()
 	{
 		return json_decode(file_get_contents('php://input'), true);
 	}
@@ -87,17 +89,21 @@
 		echo $obj;
 	}
 
-	function returnInfo($contactId)
+	function returnInfo( $userId, $firstName, $lastName, $phoneNumber, $email, $notes )
 	{
-		$retValue = '{"contactId":' . $contactId . ',"error":""}';
-		sendJSON( $retValue );
+		$retValue = '{"userId": "' . $userId . '", "firstName": "' . $firstName .'","lastName": "' . $lastName . '","phoneNumber": "' . $phoneNumber . '",
+					  "email": "' . $email . '",  "notes": "' . $notes . '",  "error": ""}';
+		sendJson( $retValue );
 	}
-	
+
+	$address = trimString($inputData["address"]);
+	$notes = trimString($inputData["notes"]);
+
 	// Return in the case of an error
 	function returnError( $err )
 	{
 		// return user name and error
-		$retValue = '{"contactId":0, "error":"' . $err . '"}';
+		$retValue = '{"contactId":" ","error":"' . $err . '"}';
 		sendJson( $retValue );
 	}
 
@@ -117,29 +123,12 @@
 		$isMobileNumberValid = FALSE;
 		if (!empty($phoneNumber)) 
 		{
-			$isMobileNumberValid = TRUE;
-			if (!preg_match("/^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/", $phoneNumber))
+			if (preg_match('/^(\+1|001)?\(?([0-9]{3})\)?([ .-]?)([0-9]{3})([ .-]?)([0-9]{4})/', $phoneNumber)) 
 			{
-				$isMobileNumberValid = FALSE;
+				$isMobileNumberValid = TRUE;
 			}
 		}
 		return $isMobileNumberValid;
 	}
-
-	// Validation for the email field
-	function validateEmail($email)
-	{
-		$isEmailValid = FALSE;
-		if (!empty($email)) 
-		{
-			$isEmailValid = TRUE;
-			if (!preg_match("/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/", $email)) 
-			{
-				$isEmailValid = FALSE;
-			}
-		}
-		return $isEmailValid;
-	  }
-
 ?>
 
