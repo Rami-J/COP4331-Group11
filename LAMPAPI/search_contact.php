@@ -17,15 +17,12 @@
 	$firstName = "";
 	$lastName = "";
 	$userID = 0;
-	$error_occurred = false;
+	$error_occurred = $inputData["userId"];
 
 	// Retrieve field from JSON file
 	$firstName = trimString($inputData["firstName"]);
 	$lastName = trimString($inputData["lastName"]);
-	$phoneNumber = trimString($inputData["phoneNumber"]);
-	$email = trimString($inputData["email"]);
-	$userId = trimString($inputData["userId"]);
-	$notes = trimString($inputData["notes"]);
+	$userID = trimString($inputData["userId"]);
 
 	// Connect to database
 	$connection = new mysqli($serverName, $databaseUsername, $databasePassword, $databaseName);
@@ -34,15 +31,10 @@
 		$error = true;
 		returnError($connection->connect_error);
 	}
-	else if (empty( $firstName ) || empty( $lastName ))
-	{
-		$error = true;
-		returnError("Please enter a first/last name of contact to search");
-	}
 	else
 	{
 		// Send the query to the database.
-		$sql = "SELECT * from Contact where firstName LIKE '%" . $firstName . "%' AND lastName LIKE '%" . $lastName . "%' AND userId = " . $userID;
+		$sql = "SELECT * FROM Contact WHERE (firstName LIKE '%" . $firstName . "%' AND lastName LIKE '%" . $lastName . "%') AND userId = " . $userID;
 		$result = $connection->query($sql);
 		if( $result != TRUE )
 		{
@@ -59,10 +51,15 @@
 				}
 		
 				$searchCount++;
-				$searchResults .= '"' . $rows["contactId"] . ' | ' . $rows["firstName"] . ' | ' . $rows["lastName"] . ' | ' . $rows["phoneNumber"] . ' | ' . $rows["email"] . ' | ' . $rows["notes"] . '"';
+				$searchResults .= '"' . $rows["contactId"] . ' | ' . $rows["firstName"] . ' | ' . $rows["lastName"] . ' | ' . $rows["phoneNumber"] . ' | ' . $rows["address"] . ' | '. $rows["email"] . ' | ' . $rows["notes"] . '"';
 			}
 		}
 		$connection->close();
+	}
+
+	if (!$error)
+	{
+		returnInfo( $searchResults );
 	}
 
 	/* Functions */
@@ -72,7 +69,13 @@
 	{
 		return json_decode(file_get_contents('php://input'), true);
 	}
-	
+
+	function returnInfo( $searchResults )
+	{
+		$retValue = '{"results":[' . $searchResults . '],"error":""}';
+		sendJSON( $retValue );
+	}
+
 	// Send the user's username and password
 	function sendJSON($obj)
 	{
