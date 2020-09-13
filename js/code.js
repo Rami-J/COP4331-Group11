@@ -187,14 +187,6 @@ function createContact()
 				var jsonObject = JSON.parse( xhr.responseText );
 				var contactId = jsonObject.contactId;
 		
-				// clear field
-				document.getElementById('firstName').value = '';
-				document.getElementById('lastName').value = '';
-				document.getElementById('phoneNumber').value = '';
-				document.getElementById('email').value = '';
-				document.getElementById('address').value = '';
-				document.getElementById('notes').value = '';				
-		
 				if( contactId < 1 )
 				{
 					document.getElementById("createContactResult").innerHTML = jsonObject.error;
@@ -202,6 +194,13 @@ function createContact()
 				}
 				else
 				{
+					// clear field
+					document.getElementById('firstName').value = '';
+					document.getElementById('lastName').value = '';
+					document.getElementById('phoneNumber').value = '';
+					document.getElementById('email').value = '';
+					document.getElementById('address').value = '';
+					document.getElementById('notes').value = '';
 					document.getElementById("createContactResult").innerHTML = "Created contact";
 				}
 			}
