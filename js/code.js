@@ -32,7 +32,7 @@ function doLogin()
 		var jsonObject = JSON.parse( xhr.responseText );
 		
 		userId = jsonObject.userId;
-		
+
 		if( userId < 1 )
 		{
 			document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
@@ -94,7 +94,7 @@ function doSignUp()
 
 		saveCookie();
 	
-		window.location.href = "color.html";
+		window.location.href = "dashboard.html";
 	}
 	catch(err)
 	{
@@ -140,7 +140,7 @@ function readCookie()
 	}
 	else
 	{
-		document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
+		//document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
 	}
 }
 
@@ -153,14 +153,28 @@ function doLogout()
 	window.location.href = "index.html";
 }
 
-function addColor()
+function createContact()
 {
-	var newColor = document.getElementById("colorText").value;
-	document.getElementById("colorAddResult").innerHTML = "";
+	readCookie();
 	
-	var jsonPayload = '{"color" : "' + newColor + '", "userId" : ' + userId + '}';
-	var url = urlBase + '/AddColor.' + extension;
+	var firstName = document.getElementById("firstName").value;
+	var lastName = document.getElementById("lastName").value;
+	var phoneNumber = document.getElementById("phoneNumber").value;
+	var email = document.getElementById('email').value;
+	var address = document.getElementById('address').value;
+	var notes = document.getElementById('notes').value;
+
+	// TODO: Add create contact result html field
+	document.getElementById("createContactResult").innerHTML = "";
 	
+	// JSON is form of information + id as last field
+	var jsonPayload = '{"firstName" : "' + firstName + '", "lastName" : "' + lastName + '", "phoneNumber" : "' + phoneNumber + '", "email" : "' + email + '", "address" : "' + address + '", "notes" : "' + notes + '", "userId" : ' + userId + '}';
+
+	console.log(userId);
+	console.log(jsonPayload);
+
+	var url = urlBase + '/create_contact.' + extension;
+
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
@@ -170,16 +184,37 @@ function addColor()
 		{
 			if (this.readyState == 4 && this.status == 200) 
 			{
-				document.getElementById("colorAddResult").innerHTML = "Color has been added";
+				var jsonObject = JSON.parse( xhr.responseText );
+				var contactId = jsonObject.contactId;
+		
+				// clear field
+				document.getElementById('firstName').value = '';
+				document.getElementById('lastName').value = '';
+				document.getElementById('phoneNumber').value = '';
+				document.getElementById('email').value = '';
+				document.getElementById('address').value = '';
+				document.getElementById('notes').value = '';				
+		
+				if( contactId < 1 )
+				{
+					document.getElementById("createContactResult").innerHTML = jsonObject.error;
+					return;
+				}
+				else
+				{
+					document.getElementById("createContactResult").innerHTML = "Created contact";
+				}
 			}
-		};
+		}
+		
 		xhr.send(jsonPayload);
+		console.log(xhr.responseText);
+		
 	}
 	catch(err)
 	{
-		document.getElementById("colorAddResult").innerHTML = err.message;
+		document.getElementById("createContactResult").innerHTML = err.message;
 	}
-	
 }
 
 function searchColor()
@@ -217,10 +252,11 @@ function searchColor()
 			}
 		};
 		xhr.send(jsonPayload);
+		
 	}
+
 	catch(err)
 	{
 		document.getElementById("colorSearchResult").innerHTML = err.message;
 	}
-	
 }
