@@ -9,9 +9,9 @@
 	$databasePassword = "Wearegroup11!";
 	$databaseName = "rami_cop4331";
 
-	// Memset fields to deafault files
+	// Memset fields to default files
 	$error = false;
-    $userId = $inputData["userId"];
+	$userId = $inputData["userId"];
 	$contactId = 0;
 	$firstName = "";
 	$lastName = "";
