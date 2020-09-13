@@ -1,6 +1,6 @@
 <?php
 	header("Access-Control-Allow-Headers: Content-type");
-	header("Access-Control-Allow-Origin: http://cop4331-group11.team");
+	header("Access-Control-Allow-Origin: *");
 	$inputData = getCreateContactInfo();
 
 	// Get database name	
@@ -9,9 +9,9 @@
 	$databasePassword = "Wearegroup11!";
 	$databaseName = "rami_cop4331";
 
-	// Memset fields to zero
+	// Memset fields to deafault files
 	$error = false;
-    	$userId = 0;
+    $userId = $inputData["userId"];
 	$contactId = 0;
 	$firstName = "";
 	$lastName = "";
@@ -19,7 +19,6 @@
 	$phoneNumber = "";
 
 	// Retrieve field from JSON file
-	$userId = trimString($inputData["userId"]);
 	$firstName = trimString($inputData["firstName"]);
 	$lastName = trimString($inputData["lastName"]);
 	$phoneNumber = trimString($inputData["phoneNumber"]);
