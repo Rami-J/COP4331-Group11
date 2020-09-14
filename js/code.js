@@ -185,8 +185,7 @@ function createContact()
 			if (this.readyState == 4 && this.status == 200) 
 			{
 				var jsonObject = JSON.parse( xhr.responseText );
-				var contactId = jsonObject.contactId;
-				
+				var contactId = jsonObject.contactId;			
 				if( contactId < 1 )
 				{
 					document.getElementById("createContactResult").innerHTML = jsonObject.error;
@@ -200,7 +199,7 @@ function createContact()
 					document.getElementById('phoneNumber').value = '';
 					document.getElementById('email').value = '';
 					document.getElementById('address').value = '';
-					document.getElementById('notes').value = '';		
+					document.getElementById('notes').value = '';
 					document.getElementById("createContactResult").innerHTML = "Created contact";
 				}
 			}
@@ -385,5 +384,4 @@ function searchColor()
 	{
 		document.getElementById("colorSearchResult").innerHTML = err.message;
 	}
-	
 }
