@@ -11,11 +11,10 @@
 </head>
 <body>
 
-
 <div class="jumbotron" id="bodyJumbotron">
-	<div class="card" id="addContactCard">
-		<img class="card-img-top" src="images/blue.jpg" alt="Card image cap" id="addContactImage">
-		<button type="button" class="btn btn-primary btn-lg" id="addContactButton">Add Contact</button>
+	<div id="addContactCard">
+	<img class="card-img-top" src="images/blue.jpg" alt="Card image cap">
+	  <button type="button" class="btn btn-primary btn-lg" id="AddContactButton">Add Contact</button>
 	</div>
 	<script type="text/javascript">
 		document.getElementById("addContactCard").onclick= function () 
@@ -23,20 +22,25 @@
 			location.href = "createContact.html";
 		};
 	</script>
-	<div class="card" id="searchContactCard">
+	<div id="searchContactCard">
 		<img class="card-img-top" src="images/blue.jpg" alt="Card image cap">
 		<button type="button" class="btn btn-primary btn-lg" id="searchContactButton">Search Contact</button>
 	</div>
-	
-	<div class="card" id="updateContactCard">
+	<div id="updateContactCard">
 		<img class="card-img-top" src="images/blue.jpg" alt="Card image cap">
 		<button type="button" class="btn btn-primary btn-lg" id="updateContactButton">Update Contact</button>
 	</div>
 	
-	<div class="card" id="deleteContactCard">
+	<div id="deleteContactCard">
 		<img class="card-img-top" src="images/blue.jpg" alt="Card image cap">
 		<button type="button" class="btn btn-primary btn-lg" id="deleteContactButton">Delete Contact</button>
 	</div>
+	<script type="text/javascript">
+		document.getElementById("deleteContactCard").onclick= function () 
+		{
+			location.href = "deleteContact.html";
+		};
+	</script>
 	
 </div>
 <div class="jumbotron" id="headerJumbotron">
@@ -44,7 +48,6 @@
 		<button type="button" class="btn btn-primary btn-lg" id="logoutButton" onclick="doLogout();">Logout</button>
 	</div>
 </div>
-
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
