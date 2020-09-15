@@ -1,0 +1,277 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Contact Manager API
+  description: An API to communicate with the contact manager for group 11's website.
+  
+definitions:
+  login:
+    type: object
+    required:
+      - login
+      - password
+    properties:
+      login:
+        type: string
+        example: "fred"
+      password:
+        type: string
+        example: "secret"
+  signUp:
+    type: object
+    required:
+      - firstName
+      - lastName
+      - login
+      - password
+    properties:
+      firstName:
+        type: string
+        example: "Fred"
+      lastName:
+        type: string
+        example: "Smith"
+      login:
+        type: string
+        example: "freds22"
+      password:
+        type: string
+        example: "secret"
+  deleteContact:
+    type: object
+    required:
+      - userId
+      - contactId
+    properties:
+      userId:
+        type: integer
+        example: 0
+      contactId:
+        type: integer
+        example: 0
+  createContact:
+    type: object
+    required:
+      - userId
+      - firstName
+      - lastName
+      - email
+      - address
+      - phoneNumber
+      - notes
+    properties:
+      userId:
+        type: integer
+        example: 0
+      firstName:
+        type: string
+        example: "Fred"
+      lastName:
+        type: string
+        example: "Smith"
+      email:
+        type: string
+        example: "freds@yahoo.com"
+      address:
+        type: string
+        example: "123 Owl Street"
+      phoneNumber:
+        type: string
+        example: "314-212-1234"
+      notes:
+        type: string
+        example: "This is Fred's note."
+  searchContact:
+    required:
+      - userId
+      - firstName
+      - lastName
+    properties:
+      userId:
+        type: integer
+        example: 0
+      firstName:
+        type: string
+        example: "Fred"
+      lastName:
+        type: string
+        example: "Smith"
+  updateContact:
+    required:
+      - userId
+      - contactId
+      - firstName
+      - lastName
+      - email
+      - address
+      - phoneNumber
+      - notes
+    properties:
+      userId:
+        type: integer
+        example: 0
+      contactId:
+        type: integer
+        example: 0
+      firstName:
+        type: string
+        example: "Joe"
+      lastName:
+        type: string
+        example: "Bob"
+      email:
+        type: string
+        example: "joeb@yahoo.com"
+      address:
+        type: string
+        example: "982 Oak Drive"
+      phoneNumber:
+        type: string
+        example: "984-212-4322"
+      notes:
+        type: string
+        example: "This is Joe's note."
+            
+host: cop4331-group11.team
+basePath: /LAMPAPI
+schemes:
+    - http
+paths:
+    /login.php:
+      post:
+        tags:
+        - Users
+        summary: Logs in to contact manager app
+        operationId: doLogin
+        description: Logs in to contact manager app
+        consumes:
+        - application/json
+        produces:
+        - application/json
+        parameters:
+        - in: body
+          name: loginItem
+          description: login
+          schema:
+            $ref: '#/definitions/login'
+        responses:
+          200:
+            description: OK
+          404:
+            description: URL Not Found
+            
+    /add_user.php:
+      post:
+        tags:
+        - Users
+        summary: Creates a new user account
+        operationId: doSignUp
+        description: Creates a new user account
+        consumes:
+        - application/json
+        produces:
+        - application/json
+        parameters:
+        - in: body
+          name: signUpItem
+          description: signUp
+          schema:
+            $ref: '#/definitions/signUp'
+        responses:
+          200:
+            description: OK
+          404:
+            description: URL Not Found
+            
+    /create_contact.php:
+      post:
+        tags:
+        - Contacts
+        summary: Creates a contact in the contact table
+        operationId: createContact
+        description: Creates a contact in the contact table
+        consumes:
+        - application/json
+        produces:
+        - application/json
+        parameters:
+        - in: body
+          name: createContactItem
+          description: createContact
+          schema:
+            $ref: '#/definitions/createContact'
+        responses:
+          200:
+            description: OK
+          404:
+            description: URL Not Found
+            
+    /search_contact.php:
+      post:
+        tags:
+        - Contacts
+        summary: Searches for a contact from the contact table
+        operationId: searchContact
+        description: Searches for a contact from the contact table
+        consumes:
+        - application/json
+        produces:
+        - application/json
+        parameters:
+        - in: body
+          name: searchContactItem
+          description: searchContact
+          schema:
+            $ref: '#/definitions/searchContact'
+        responses:
+          200:
+            description: OK
+          404:
+            description: URL Not Found
+            
+    /update_contact.php:
+      post:
+        tags:
+        - Contacts
+        summary: Updates a contact in the contact table
+        operationId: updateContact
+        description: Updates a contact in the contact table
+        consumes:
+        - application/json
+        produces:
+        - application/json
+        parameters:
+        - in: body
+          name: updateContactItem
+          description: updateContact
+          schema:
+            $ref: '#/definitions/updateContact'
+        responses:
+          200:
+            description: OK
+          404:
+            description: URL Not Found
+            
+    /delete_contact.php:
+      post:
+        tags:
+        - Contacts
+        summary: Deletes a contact from the contact table
+        operationId: deleteContact
+        description: Deletes a contact from the contact table
+        consumes:
+        - application/json
+        produces:
+        - application/json
+        parameters:
+        - in: body
+          name: deleteContactItem
+          description: deleteContact
+          schema:
+            $ref: '#/definitions/deleteContact'
+        responses:
+          200:
+            description: OK
+          404:
+            description: URL Not Found
+
