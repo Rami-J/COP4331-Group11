@@ -164,10 +164,8 @@ function createContact()
 	var address = document.getElementById('address').value;
 	var notes = document.getElementById('notes').value;
 
-	// TODO: Add create contact result html field
 	document.getElementById("createContactResult").innerHTML = "";
 	
-	// JSON is form of information + id as last field
 	var jsonPayload = '{"firstName" : "' + firstName + '", "lastName" : "' + lastName + '", "phoneNumber" : "' + phoneNumber + '", "email" : "' + email + '", "address" : "' + address + '", "notes" : "' + notes + '", "userId" : ' + userId + '}';
 
 	console.log(userId);
@@ -185,7 +183,8 @@ function createContact()
 			if (this.readyState == 4 && this.status == 200) 
 			{
 				var jsonObject = JSON.parse( xhr.responseText );
-				var contactId = jsonObject.contactId;			
+				var contactId = jsonObject.contactId;
+				
 				if( contactId < 1 )
 				{
 					document.getElementById("createContactResult").innerHTML = jsonObject.error;
@@ -199,8 +198,9 @@ function createContact()
 					document.getElementById('phoneNumber').value = '';
 					document.getElementById('email').value = '';
 					document.getElementById('address').value = '';
-					document.getElementById('notes').value = '';
+					document.getElementById('notes').value = '';		
 					document.getElementById("createContactResult").innerHTML = "Created contact";
+
 				}
 			}
 		}
@@ -219,10 +219,9 @@ function deleteContact()
 {
 	readCookie();
 	
-	var firstName = document.getElementById("firstName").value;
-	var lastName = document.getElementById("lastName").value;
+	var contactId = document.getElementById("contactId").value;
 	
-	var jsonPayload = '{"firstName" : "' + firstName + '", "lastName" : "' + lastName + '", "userId" : "' + userId + '"}';;
+	var jsonPayload = '{"contactId" : "' + contactId + '", "userId" : "' + userId + '"}';;
 
 	console.log(userId);
 	console.log(jsonPayload);
@@ -242,6 +241,8 @@ function deleteContact()
 
 				var jsonObject = JSON.parse( xhr.responseText );
 				var contactId = jsonObject.contactId;
+				var firstName = jsonObject.firstName;
+				var lastName = jsonObject.lastName;
 				
 				if( contactId < 1 )
 				{
@@ -250,10 +251,8 @@ function deleteContact()
 				}
 				else
 				{
-					// clear field
-					document.getElementById('firstName').value = '';
-					document.getElementById('lastName').value = '';
-					document.getElementById("deleteContactResult").innerHTML = "Contact has been deleted";
+					document.getElementById('contactId').value = '';
+					document.getElementById("deleteContactResult").innerHTML =  firstName + " " + lastName + " has been deleted";
 				}
 				
 			}
@@ -271,13 +270,12 @@ function deleteContact()
 
 function emptyContactTable()
 {
-	// TODO: implement within html file with searchTable id and tbody tag
 	var table = document.getElementById("searchTable").getElementsByTagName("tbody")[0];
 	var rows = table.getElementsByTagName("tr");
 	
-	while(rows.length > 1)
+	while(rows.length > 0)
 	{
-        table.removeChild(rows[1]);
+        table.removeChild(rows[0]);
     }
 }
 
@@ -318,7 +316,6 @@ function searchContact()
 					table = document.getElementById("searchTable").getElementsByTagName("tbody")[0];
 
 					var row = table.insertRow(0);
-					// Insert first, last, phone, address, email, notes, contact id
 					row.insertCell(0).innerHTML = contact[0];
 					row.insertCell(0).innerHTML = contact[6];
 					row.insertCell(0).innerHTML = contact[5];
@@ -326,7 +323,6 @@ function searchContact()
 					row.insertCell(0).innerHTML = contact[3];
 					row.insertCell(0).innerHTML = contact[2];
 					row.insertCell(0).innerHTML = contact[1];
-					// TODO: insert formatting for search results
 				}
 			}
 		};
@@ -341,17 +337,27 @@ function searchContact()
 	
 }
 
-
-function searchColor()
+function updateContact()
 {
-	var srch = document.getElementById("searchText").value;
-	document.getElementById("colorSearchResult").innerHTML = "";
+	readCookie();
 	
-	var colorList = "";
+	var contactId = document.getElementById("contactId").value;
+	var firstName = document.getElementById("firstName").value;
+	var lastName = document.getElementById("lastName").value;
+	var phoneNumber = document.getElementById("phoneNumber").value;
+	var email = document.getElementById('email').value;
+	var address = document.getElementById('address').value;
+	var notes = document.getElementById('notes').value;
+
+	document.getElementById("updateContactResult").innerHTML = "";
 	
-	var jsonPayload = '{"search" : "' + srch + '","userId" : ' + userId + '}';
-	var url = urlBase + '/SearchColors.' + extension;
-	
+	var jsonPayload = '{"contactId" : "' + contactId + '", "userId" : "' + userId + '", "firstName" : "' + firstName + '", "lastName" : "' + lastName + '", "phoneNumber" : "' + phoneNumber + '", "email" : "' + email + '", "address" : "' + address + '", "notes" : "' + notes + '"}';
+
+	console.log(userId);
+	console.log(jsonPayload);
+
+	var url = urlBase + '/update_contact.' + extension;
+
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
@@ -361,27 +367,34 @@ function searchColor()
 		{
 			if (this.readyState == 4 && this.status == 200) 
 			{
-				document.getElementById("colorSearchResult").innerHTML = "Color(s) has been retrieved";
 				var jsonObject = JSON.parse( xhr.responseText );
+				var contactId = jsonObject.contactId;
 				
-				for( var i=0; i<jsonObject.results.length; i++ )
+				if( contactId < 1 )
 				{
-					colorList += jsonObject.results[i];
-					if( i < jsonObject.results.length - 1 )
-					{
-						colorList += "<br />\r\n";
-					}
+					document.getElementById("updateContactResult").innerHTML = jsonObject.error;
+					return;
 				}
-				
-				document.getElementsByTagName("p")[0].innerHTML = colorList;
-			}
-		};
-		xhr.send(jsonPayload);
-		
-	}
+				else
+				{
+					document.getElementById('contactId').value = '';
+					document.getElementById('firstName').value = '';
+					document.getElementById('lastName').value = '';
+					document.getElementById('phoneNumber').value = '';
+					document.getElementById('email').value = '';
+					document.getElementById('address').value = '';
+					document.getElementById('notes').value = '';		
+					document.getElementById("updateContactResult").innerHTML = "Updated contact";
 
+				}
+			}
+		}
+		
+		xhr.send(jsonPayload);
+		console.log(xhr.responseText);
+	}
 	catch(err)
 	{
-		document.getElementById("colorSearchResult").innerHTML = err.message;
+		document.getElementById("updateContactResult").innerHTML = err.message;
 	}
 }
