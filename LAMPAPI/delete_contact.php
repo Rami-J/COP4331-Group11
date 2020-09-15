@@ -9,17 +9,12 @@
 	$databasePassword = "Wearegroup11!";
     $databaseName = "rami_cop4331";
     
-    // Memset fields to zero
-    $userId = 0;
+    // Memset fields to default values
     $contactId = 0;
 	$error = false;
-	$login = "";
-	$password = "";
 
 	// Retrieve field from JSON file
-	$firstName = trimString($inputData["firstName"]);
-    $lastName = trimString($inputData["lastName"]);
-    $userId = trimString($inputData["userId"]);
+	$contactId = $inputData["contactId"];
 
     // Connect to database
 	$connection = new mysqli($serverName, $databaseUsername, $databasePassword, $databaseName);
@@ -28,36 +23,25 @@
 		$error = true;
 		returnError($connection->connect_error);
 	}
-	else if (empty( $firstName ) || empty( $lastName ))
-	{
-		$error = true;
-		returnError("Please enter a first/last name to delete.");
-	}
 	else
 	{
 		// Send the query to the database.
-        $sql = 
-        "SELECT contactId FROM Contact WHERE userId = '" . $userId . "' AND firstName = '" . $firstName . "' AND lastName = '" . $lastName . "'";
-        
+		$sql = "SELECT contactId FROM Contact WHERE contactId = '" . $contactId . "'";
 		$result = $connection->query($sql);
 
-		// If the number of rows fetched is positive we found the contact to delete.
-		if ($result->num_rows > 0)
+		if ($result->num_rows == 0)
 		{
-            // Get the contactId of the contact to be deleted.
-            $contactId = ($result->fetch_assoc())["contactId"];
-
-            // Make the query to delete the contact from the table.
-            $sql = "DELETE FROM Contact WHERE contactId = '" . $contactId . "'";
-            $result = $connection->query($sql);
-        }
-        else
-        {
             $error = true;
             returnError("Could not find contact in table.");
-        }
+		}
+		else
+		{
+			$sql = "DELETE FROM Contact WHERE contactId = '" . $contactId . "'";
+			$result = $connection->query($sql);
+		}
 	}
 	$connection->close();
+
 	// Return the contact's id as JSON.
 	if (!$error)
 	{
