@@ -10,6 +10,7 @@
 	$databasePassword = "Wearegroup11!";
     $databaseName = "rami_cop4331";
 	
+	// Retrieve field from JSON file
 	$userId = $inputData["userId"];
 	$contactId = $inputData["contactId"];
 	$firstName = trimString($inputData["firstName"]);
@@ -19,27 +20,29 @@
 	$phoneNumber = trimString($inputData["phoneNumber"]);
 	$notes = trimString($inputData["notes"]);
 
-	// Retrieve field from JSON file
-	$contactId = $inputData["contactId"];
-
-	if (empty($firstName) || empty($lastName))
-	{
-		returnError("Please enter a non-empty first/last name");
-	}
-	else if (validatePhoneNumber( $phoneNumber ) === FALSE)
-	{
-		returnError("Please enter a valid phone number of the contact in the format XXX-XXX-XXXX");
-	}
-	else if ( !empty( $email ) && !filter_var( $email, FILTER_VALIDATE_EMAIL) )
-	{
-		returnError("Please enter a valid email address of the contact");
-	}
+	$error = false;
 
     // Connect to database
 	$connection = new mysqli($serverName, $databaseUsername, $databasePassword, $databaseName);
 	if ($connection->connect_error)
 	{
+		$error = true;
 		returnError($connection->connect_error);
+	}
+	else if (empty($firstName) || empty($lastName))
+	{
+		$error = true;
+		returnError("Please enter a non-empty first/last name");
+	}
+	else if (validatePhoneNumber( $phoneNumber ) === FALSE)
+	{
+		$error = true;
+		returnError("Please enter a valid phone number of the contact in the format XXX-XXX-XXXX");
+	}
+	else if ( !empty( $email ) && !filter_var( $email, FILTER_VALIDATE_EMAIL) )
+	{
+		$error = true;
+		returnError("Please enter a valid email address of the contact");
 	}
 	else
 	{
@@ -48,6 +51,7 @@
 
 		if ($result->num_rows == 0)
 		{
+			$error = true;
 			returnError("Could not find contact in table.");
 		}
 		else
@@ -58,8 +62,12 @@
 			$result = $connection->query($sql);
 
 			$connection->close();
-			returnInfo($contactId, $firstName, $lastName);
 		}
+	}
+
+	if (!$error)
+	{
+		returnInfo($contactId, $firstName, $lastName);
 	}
 
 	/* Functions */
