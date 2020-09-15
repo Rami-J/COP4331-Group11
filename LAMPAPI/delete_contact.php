@@ -10,10 +10,13 @@
     $databaseName = "rami_cop4331";
     
     // Memset fields to default values
-    $contactId = 0;
+	$contactId = 0;
+	$firstName = "";
+	$lastName = "";
 	$error = false;
 
 	// Retrieve field from JSON file
+	$userId = $inputData["userId"];
 	$contactId = $inputData["contactId"];
 
     // Connect to database
@@ -26,7 +29,7 @@
 	else
 	{
 		// Send the query to the database.
-		$sql = "SELECT contactId FROM Contact WHERE contactId = '" . $contactId . "'";
+		$sql = "SELECT firstName, lastName, contactId FROM Contact WHERE contactId = '" . $contactId . "' AND userId = '" . $userId . "'";
 		$result = $connection->query($sql);
 
 		if ($result->num_rows == 0)
@@ -36,7 +39,13 @@
 		}
 		else
 		{
-			$sql = "DELETE FROM Contact WHERE contactId = '" . $contactId . "'";
+			// store first name / last name
+			$row = $result->fetch_assoc();
+			$firstName = $row["firstName"];
+			$lastName = $row["lastName"];
+			
+			// then delete
+			$sql = "DELETE FROM Contact WHERE contactId = '" . $contactId . "' AND userId = '" . $userId . "'";
 			$result = $connection->query($sql);
 		}
 	}
@@ -45,7 +54,7 @@
 	// Return the contact's id as JSON.
 	if (!$error)
 	{
-		returnInfo($contactId);
+		returnInfo($contactId, $firstName, $lastName);
 	}
 
     /* Functions */
@@ -62,9 +71,9 @@
 		echo $obj;
 	}
 
-	function returnInfo($contactId)
+	function returnInfo($contactId, $firstName, $lastName)
 	{
-		$retValue = '{"contactId":' . $contactId . ',"error":""}';
+		$retValue = '{"contactId":' . $contactId . ',"firstName":"' . $firstName . '", "lastName":"' . $lastName . '","error":""}';
 		sendJson( $retValue );
 	}
 	
@@ -72,7 +81,7 @@
 	function returnError( $err )
 	{
 		// return user name and error
-		$retValue = '{"contactId":0,"error":"' . $err . '"}';
+		$retValue = '{"contactId":0, "firstName":"", "lastName":"", "error":"' . $err . '"}';
 		sendJson( $retValue );
 	}
 
