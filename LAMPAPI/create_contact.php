@@ -9,9 +9,9 @@
 	$databasePassword = "Wearegroup11!";
 	$databaseName = "rami_cop4331";
 
-	// Memset fields to default files
+	// Memset fields to deafault files
 	$error = false;
-	$userId = $inputData["userId"];
+    $userId = $inputData["userId"];
 	$contactId = 0;
 	$firstName = "";
 	$lastName = "";
@@ -43,7 +43,7 @@
 		$error = true;
 		returnError("Please enter a valid phone number of the contact in the format XXX-XXX-XXXX");
 	}
-	else if (!filter_var( $email, FILTER_VALIDATE_EMAIL) )
+	else if ( !empty( $email ) && !filter_var( $email, FILTER_VALIDATE_EMAIL) )
 	{
 		$error = true;
 		returnError("Please enter a valid email address of the contact");
@@ -130,3 +130,4 @@
 		return $isMobileNumberValid;
 	}
 ?>
+
