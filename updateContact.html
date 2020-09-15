@@ -1,0 +1,76 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width = device-width, initial-scale=1">
+		<title>COP 4331 LAMP Stack Demo</title>
+		<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+		<script type="text/javascript" src="js/md5.js"></script>
+		<script type="text/javascript" src="js/code.js"></script>
+		<link href="css/update_contact_styles.css" rel="stylesheet">	
+	</head>
+	<body>
+		<div class="container" id="container">
+		<div class="jumbotron">
+		<img src="images/blue.jpg">
+		<!-- TODO: Replace div for dashboard elements -->
+		<div id="deleteContactDiv">
+		<h4 style = "position:relative; top:-15px;"> Update Contact</h4>
+		<div class="textbox">
+			<svg width="1em" height="1em" viewBox="0 0 12 16" class="bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+				<path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+			</svg>
+			<input type="text" id="contactId" placeholder="Contact ID" /><br />
+		</div>
+		<div class="textbox">
+			<svg width="1em" height="1em" viewBox="0 0 12 16" class="bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+				<path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+			</svg>
+			<input type="text" id="firstName" placeholder="First Name" /><br />
+		</div>
+		<div class="textbox">
+			<svg width="1em" height="1em" viewBox="0 0 12 16" class="bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+				<path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+			</svg>
+			<input type="text" id="lastName" placeholder="Last Name" /><br />
+		</div>
+		<div class="textbox">
+			<svg width="1em" height="1em" viewBox="0 0 12 16" class="bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+				<path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+			</svg>
+			<input type="text" id="email" placeholder="Email" /><br />
+		</div>
+		<div class="textbox">
+			<svg width="1em" height="1em" viewBox="0 0 12 16" class="bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+				<path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+			</svg>
+			<input type="text" id="address" placeholder="Address" /><br />
+		</div>
+		<div class="textbox">
+			<svg width="1em" height="1em" viewBox="0 0 12 16" class="bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+				<path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+			</svg>
+			<input type="text" id="phoneNumber" placeholder="Phone Number" /><br />
+		</div>
+	</div>
+	<div class="textbox">
+		<svg width="1em" height="1em" viewBox="0 0 12 16" class="bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+			<path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+		</svg>
+		<input type="text" id="notes" placeholder="Notes" /><br />
+	</div>
+
+		<button type="button" id="updateContactButton" class="btn btn-default btn-lg" onclick="updateContact();">Update Contact</button>
+		<button type="button" id="returnButton" class="btn btn-default btn-lg">Return to Dashboard</button>
+
+		<script type="text/javascript">
+			document.getElementById("returnButton").onclick= function () 
+			{
+				location.href = "dashboard.html";
+			};
+		</script>
+		<span style="font-weight:bold" id="updateContactResult"></span>	
+
+	</div>
+	</div>
+	</div>
