@@ -18,11 +18,12 @@
 }
 
 .jumbotron{
-	width:640px;
-    height: 480px;
-	position:absolute;
-	top:15%;
-	left:30%;
+	width:60%;
+        height: 480px;
+	position: fixed;
+  	top: 50%;
+ 	left: 50%;
+        transform: translate(-50%, -50%);	
 	background-color: #E4EFF9;
 	margin: 0 auto;	
 
@@ -95,3 +96,6 @@ th{
 	background: #354182;
 	border-radius: 5px;
 }
+
+
+
