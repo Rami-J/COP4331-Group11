@@ -1,3 +1,4 @@
+
 .btn{
 	width:100%;
 	background-color: #354182;
@@ -17,10 +18,10 @@
 
 .jumbotron{
 	width:400px;
-    height: 480px;
+        height: 480px;
 	position:absolute;
-	top:15%;
-	left:30%;
+	top:10%;
+	left:20%;
 	background-color: #E4EFF9;
 	margin: 0 auto;	
 
