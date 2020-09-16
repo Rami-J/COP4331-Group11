@@ -104,20 +104,16 @@
 		$string = trim($string);
 		$string = str_replace('"', '', $string);
 		$string = str_replace("'", '', $string);
-		$string = str_replace(';', '', $string);
-		return $string;
+		return str_replace(';', '', $string);
 	}
 
 	// Validation for the mobile field
 	function validatePhoneNumber($phoneNumber)
 	{
 		$isMobileNumberValid = FALSE;
-		if (!empty($phoneNumber)) 
+		if (!empty($phoneNumber) && preg_match('/^(\+1|001)?\(?([0-9]{3})\)?([ .-]?)([0-9]{3})([ .-]?)([0-9]{4})/', $phoneNumber)) 
 		{
-			if (preg_match('/^(\+1|001)?\(?([0-9]{3})\)?([ .-]?)([0-9]{3})([ .-]?)([0-9]{4})/', $phoneNumber)) 
-			{
-				$isMobileNumberValid = TRUE;
-			}
+			$isMobileNumberValid = TRUE;
 		}
 		return $isMobileNumberValid;
 	}

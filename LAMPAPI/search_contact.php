@@ -36,7 +36,7 @@
 		// Send the query to the database.
 		$sql = "SELECT * FROM Contact WHERE (firstName LIKE '%" . $firstName . "%' AND lastName LIKE '%" . $lastName . "%') AND userId = " . $userID;
 		$result = $connection->query($sql);
-		if( $result != TRUE )
+		if( !$result)
 		{
 			$error = true;
 			returnError( $connection->error );
@@ -97,8 +97,7 @@
 		$string = trim($string);
 		$string = str_replace('"', '', $string);
 		$string = str_replace("'", '', $string);
-		$string = str_replace(';', '', $string);
-		return $string;
+		return str_replace(';', '', $string);
 	}
 
 ?>

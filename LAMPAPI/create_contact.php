@@ -54,7 +54,7 @@
         $sql = "INSERT INTO Contact (firstName, lastName, email, address, phoneNumber, notes, dateRecordCreated, userId)
 				VALUES ('" . $firstName . "', '" . $lastName . "','" . $email . "','" . $address . "','" . $phoneNumber . "','" . $notes . "', CURDATE(),'" . $userId . "')";
 
-		if( $result = $connection->query($sql) != TRUE )
+		if( !$result = $connection->query($sql) )
 		{
 			$error = true;
 			returnError( $connection->error );
@@ -112,20 +112,16 @@
 		$string = trim($string);
 		$string = str_replace('"', '', $string);
 		$string = str_replace("'", '', $string);
-		$string = str_replace(';', '', $string);
-		return $string;
+		return str_replace(';', '', $string);
 	}
 
 	// Validation for the mobile field
 	function validatePhoneNumber($phoneNumber)
 	{
 		$isMobileNumberValid = FALSE;
-		if (!empty($phoneNumber)) 
+		if (!empty($phoneNumber) && preg_match('/^(\+1|001)?\(?([0-9]{3})\)?([ .-]?)([0-9]{3})([ .-]?)([0-9]{4})/', $phoneNumber)) 
 		{
-			if (preg_match('/^(\+1|001)?\(?([0-9]{3})\)?([ .-]?)([0-9]{3})([ .-]?)([0-9]{4})/', $phoneNumber)) 
-			{
-				$isMobileNumberValid = TRUE;
-			}
+			$isMobileNumberValid = TRUE;
 		}
 		return $isMobileNumberValid;
 	}
