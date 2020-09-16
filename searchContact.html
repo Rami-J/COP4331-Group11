@@ -1,5 +1,5 @@
-
-<html>
+<!DOCTYPE html>
+<html lang="en" xml:lang="en">
 	<head>
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,8 +13,6 @@
 	<body>
 		<div class="container" id="container">
 		<div class="jumbotron">
-		<!-- <img src="images/blue.jpg"> -->
-		<!-- TODO: Replace div for dashboard elements -->
 		<div id="deleteContactDiv">
 		<h4 style = "position:relative; top:-15px;"> Search Contact</h4>
 		<div class="textbox">
@@ -28,9 +26,7 @@
 				<path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
 			  </svg>
 			  <input type="text" id="lastName" placeholder="Last Name" /><br />
-		</div>
-		<!-- 	// TODO: implement within html file with searchTable id and tbody tag -->
-	
+		</div>	
 		<button type="button" id="searchContactButton" class="btn btn-default btn-lg" onclick="searchContact();">Search Contact</button>
 		<button type="button" id="returnButton" class="btn btn-default btn-lg">Return to Dashboard</button>
 		<script type="text/javascript">
@@ -42,7 +38,8 @@
 		
 		<span style="font-weight:bold" id="searchContactResult"></span>	
 		<div class="myTable">
-		<table id="searchTable" class="table table-striped table-bordered table-sm" cellspacing="0" >
+		<table id="searchTable" class="table table-striped table-bordered table-sm">
+			<caption>Search Results</caption>
 			<thead>
 			  <tr>
 				<th class="th-sm">First Name
