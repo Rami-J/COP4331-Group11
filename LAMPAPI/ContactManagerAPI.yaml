@@ -84,18 +84,14 @@ definitions:
   searchContact:
     required:
       - userId
-      - firstName
-      - lastName
+      - name
     properties:
       userId:
         type: integer
         example: 0
-      firstName:
+      name:
         type: string
-        example: "Fred"
-      lastName:
-        type: string
-        example: "Smith"
+        example: "Fred Smith"
   updateContact:
     required:
       - userId
