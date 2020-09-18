@@ -1,0 +1,272 @@
+---
+swagger: "2.0"
+info:
+  description: An API to communicate with the contact manager for group 11's website.
+  version: 1.0.0
+  title: Contact Manager API
+host: cop4331-group11.team
+basePath: /LAMPAPI
+schemes:
+- http
+paths:
+  /login.php:
+    post:
+      tags:
+      - Users
+      summary: Logs in to contact manager app
+      description: Logs in to contact manager app
+      operationId: doLogin
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: loginItem
+        description: login
+        required: false
+        schema:
+          $ref: '#/definitions/login'
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: URL Not Found
+  /add_user.php:
+    post:
+      tags:
+      - Users
+      summary: Creates a new user account
+      description: Creates a new user account
+      operationId: doSignUp
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: signUpItem
+        description: signUp
+        required: false
+        schema:
+          $ref: '#/definitions/signUp'
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: URL Not Found
+  /create_contact.php:
+    post:
+      tags:
+      - Contacts
+      summary: Creates a contact in the contact table
+      description: Creates a contact in the contact table
+      operationId: createContact
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: createContactItem
+        description: createContact
+        required: false
+        schema:
+          $ref: '#/definitions/createContact'
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: URL Not Found
+  /search_contact.php:
+    post:
+      tags:
+      - Contacts
+      summary: Searches for a contact from the contact table
+      description: Searches for a contact from the contact table
+      operationId: searchContact
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: searchContactItem
+        description: searchContact
+        required: false
+        schema:
+          $ref: '#/definitions/searchContact'
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: URL Not Found
+  /update_contact.php:
+    post:
+      tags:
+      - Contacts
+      summary: Updates a contact in the contact table
+      description: Updates a contact in the contact table
+      operationId: updateContact
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: updateContactItem
+        description: updateContact
+        required: false
+        schema:
+          $ref: '#/definitions/updateContact'
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: URL Not Found
+  /delete_contact.php:
+    post:
+      tags:
+      - Contacts
+      summary: Deletes a contact from the contact table
+      description: Deletes a contact from the contact table
+      operationId: deleteContact
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: deleteContactItem
+        description: deleteContact
+        required: false
+        schema:
+          $ref: '#/definitions/deleteContact'
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: URL Not Found
+definitions:
+  login:
+    type: object
+    required:
+    - login
+    - password
+    properties:
+      login:
+        type: string
+        example: fred
+      password:
+        type: string
+        example: secret
+  signUp:
+    type: object
+    required:
+    - firstName
+    - lastName
+    - login
+    - password
+    properties:
+      firstName:
+        type: string
+        example: Fred
+      lastName:
+        type: string
+        example: Smith
+      login:
+        type: string
+        example: freds22
+      password:
+        type: string
+        example: secret
+  deleteContact:
+    type: object
+    required:
+    - contactId
+    - userId
+    properties:
+      userId:
+        type: integer
+        example: 0
+      contactId:
+        type: integer
+        example: 0
+  createContact:
+    type: object
+    required:
+    - address
+    - email
+    - firstName
+    - lastName
+    - notes
+    - phoneNumber
+    - userId
+    properties:
+      userId:
+        type: integer
+        example: 0
+      firstName:
+        type: string
+        example: Fred
+      lastName:
+        type: string
+        example: Smith
+      email:
+        type: string
+        example: freds@yahoo.com
+      address:
+        type: string
+        example: 123 Owl Street
+      phoneNumber:
+        type: string
+        example: 314-212-1234
+      notes:
+        type: string
+        example: This is Fred's note.
+  searchContact:
+    required:
+    - name
+    - userId
+    properties:
+      userId:
+        type: integer
+        example: 0
+      name:
+        type: string
+        example: Fred Smith
+  updateContact:
+    required:
+    - address
+    - contactId
+    - email
+    - firstName
+    - lastName
+    - notes
+    - phoneNumber
+    - userId
+    properties:
+      userId:
+        type: integer
+        example: 0
+      contactId:
+        type: integer
+        example: 0
+      firstName:
+        type: string
+        example: Joe
+      lastName:
+        type: string
+        example: Bob
+      email:
+        type: string
+        example: joeb@yahoo.com
+      address:
+        type: string
+        example: 982 Oak Drive
+      phoneNumber:
+        type: string
+        example: 984-212-4322
+      notes:
+        type: string
+        example: This is Joe's note.
