@@ -19,14 +19,8 @@
 			<svg width="1em" height="1em" viewBox="0 0 12 16" class="bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 				<path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
 			</svg>
-			<input type="text" id="firstName" placeholder="First Name" /><br />
+			<input type="text" id="name" placeholder="Name" /><br />
 		</div>
-		<div class="textbox">
-			<svg width="1em" height="1em" viewBox="0 0 12 16" class="bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-				<path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-			  </svg>
-			  <input type="text" id="lastName" placeholder="Last Name" /><br />
-		</div>	
 		<button type="button" id="searchContactButton" class="btn btn-default btn-lg" onclick="searchContact();">Search Contact</button>
 		<button type="button" id="returnButton" class="btn btn-default btn-lg">Return to Dashboard</button>
 		<script type="text/javascript">
@@ -37,24 +31,25 @@
 		</script>
 		
 		<span style="font-weight:bold" id="searchContactResult"></span>	
-		<div class="myTable">
-		<table id="searchTable" class="table table-striped table-bordered table-sm">
-			<caption>Search Results</caption>
+		<div class="myTable"style="background-image: url(images/blue_blur.jpg);background-size: cover;">
+		<table id="searchTable">
 			<thead>
 			  <tr>
-				<th class="th-sm" id="tableColumn">First Name
+				<th class="th-sm" id="tableColumnFN">First Name
 				</th>
-				<th class="th-sm" id="tableColumn">Last Name
+				<th class="th-sm" id="tableColumnLN">Last Name
 				</th>
-				<th class="th-sm" id="tableColumn">Phone Number
+				<th class="th-sm" id="tableColumnPN">Phone Number
 				</th>
-				<th class="th-sm" id="tableColumn">Address
+				<th class="th-sm" id="tableColumnAD">Address
 				</th>
-				<th class="th-sm" id="tableColumn">Email
+				<th class="th-sm" id="tableColumnEM">Email
 				</th>
-				<th class="th-sm" id="tableColumn">Notes
+				<th class="th-sm" id="tableColumnNT">Notes
 				</th>
-				<th class="th-sm" id="tableColumn">Contact ID
+				<th class="th-button" id="tableColumnUpdateB">Update
+				</th>
+				<th class="th-button" id="tableColumnDeleteB">Delete
 				</th>
 			  </tr>
 			</thead>
@@ -62,6 +57,7 @@
 			</tbody>
 		</table>
 		</div>
+		<span style="font-weight:bold" id="deleteContactResult"></span>	
 	</div>
 	</div>
 	</div>
@@ -69,4 +65,4 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 	</body>
-</html>
+	</html>
