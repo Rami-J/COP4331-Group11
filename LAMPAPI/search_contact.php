@@ -14,15 +14,13 @@
 	$error = false;
 	$searchResults = "";
 	$searchCount = 0;
-	$firstName = "";
-	$lastName = "";
+	$name = "";
 	$userID = 0;
 	$error_occurred = $inputData["userId"];
 
 	// Retrieve field from JSON file
-	$firstName = trimString($inputData["firstName"]);
-	$lastName = trimString($inputData["lastName"]);
-	$userID = trimString($inputData["userId"]);
+	$name = trimString($inputData["name"]);
+	$userId = $inputData["userId"];
 
 	// Connect to database
 	$connection = new mysqli($serverName, $databaseUsername, $databasePassword, $databaseName);
@@ -33,10 +31,11 @@
 	}
 	else
 	{
-		// Send the query to the database.
-		$sql = "SELECT * FROM Contact WHERE (firstName LIKE '%" . $firstName . "%' AND lastName LIKE '%" . $lastName . "%') AND userId = " . $userID;
+		// Send the query to the database
+		$sql = "SELECT * FROM Contact WHERE (CONCAT(firstName, ' ',lastName) LIKE '" . $name . "%'  OR CONCAT(lastName, ' ',firstName) LIKE '" . $name . "%') AND userId = '" . $userId . "'";
+
 		$result = $connection->query($sql);
-		if( !$result)
+		if( $result != TRUE )
 		{
 			$error = true;
 			returnError( $connection->error );
@@ -53,6 +52,11 @@
 				$searchCount++;
 				$searchResults .= '"' . $rows["contactId"] . ' | ' . $rows["firstName"] . ' | ' . $rows["lastName"] . ' | ' . $rows["phoneNumber"] . ' | ' . $rows["address"] . ' | '. $rows["email"] . ' | ' . $rows["notes"] . '"';
 			}
+		}
+		else
+		{
+			$error = true;
+			returnError("Contact not found");
 		}
 		$connection->close();
 	}
@@ -87,7 +91,7 @@
 	function returnError( $err )
 	{
 		// return user name and error
-		$retValue = '{"username":" ","error":"' . $err . '"}';
+		$retValue = '{"results":[],"error":"' . $err . '"}';
 		sendJson( $retValue );
 	}
 
@@ -97,7 +101,8 @@
 		$string = trim($string);
 		$string = str_replace('"', '', $string);
 		$string = str_replace("'", '', $string);
-		return str_replace(';', '', $string);
+		$string = str_replace(';', '', $string);
+		return $string;
 	}
 
 ?>
