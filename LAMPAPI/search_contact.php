@@ -35,7 +35,7 @@
 		$sql = "SELECT * FROM Contact WHERE (CONCAT(firstName, ' ',lastName) LIKE '" . $name . "%'  OR CONCAT(lastName, ' ',firstName) LIKE '" . $name . "%') AND userId = '" . $userId . "'";
 
 		$result = $connection->query($sql);
-		if( $result != TRUE )
+		if( !$result )
 		{
 			$error = true;
 			returnError( $connection->error );
@@ -101,8 +101,8 @@
 		$string = trim($string);
 		$string = str_replace('"', '', $string);
 		$string = str_replace("'", '', $string);
-		$string = str_replace(';', '', $string);
-		return $string;
+
+		return str_replace(';', '', $string);
 	}
 
 ?>

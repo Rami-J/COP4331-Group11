@@ -53,10 +53,7 @@ function doLogin()
 }
 
 function doSignUp()
-{
-	login = "";
-	password = "";
-	
+{	
 	firstName = document.getElementById("firstName").value;
 	lastName = document.getElementById("lastName").value;
 	var login = document.getElementById("username").value;
@@ -156,8 +153,8 @@ function createContact()
 {
 	readCookie();
 	
-	var firstName = document.getElementById("firstName").value;
-	var lastName = document.getElementById("lastName").value;
+	var contactFirstName = document.getElementById("firstName").value;
+	var contactLastName = document.getElementById("lastName").value;
 	var phoneNumber = document.getElementById("phoneNumber").value;
 	var email = document.getElementById('email').value;
 	var address = document.getElementById('address').value;
@@ -165,7 +162,7 @@ function createContact()
 
 	document.getElementById("createContactResult").innerHTML = "";
 	
-	var jsonPayload = '{"firstName" : "' + firstName + '", "lastName" : "' + lastName + '", "phoneNumber" : "' + phoneNumber + '", "email" : "' + email + '", "address" : "' + address + '", "notes" : "' + notes + '", "userId" : ' + userId + '}';
+	var jsonPayload = '{"firstName" : "' + contactFirstName + '", "lastName" : "' + contactLastName + '", "phoneNumber" : "' + phoneNumber + '", "email" : "' + email + '", "address" : "' + address + '", "notes" : "' + notes + '", "userId" : ' + userId + '}';
 
 	console.log(userId);
 	console.log(jsonPayload);
@@ -239,9 +236,9 @@ function deleteContact()
 				document.getElementById("deleteContactResult").innerHTML = "Contact has been deleted";
 
 				var jsonObject = JSON.parse( xhr.responseText );
-				var contactId = jsonObject.contactId;
-				var firstName = jsonObject.firstName;
-				var lastName = jsonObject.lastName;
+				contactId = jsonObject.contactId;
+				var contactFirstName = jsonObject.firstName;
+				var contactLastName = jsonObject.lastName;
 				
 				if( contactId < 1 )
 				{
@@ -251,7 +248,7 @@ function deleteContact()
 				else
 				{
 					document.getElementById('contactId').value = '';
-					document.getElementById("deleteContactResult").innerHTML =  firstName + " " + lastName + " has been deleted";
+					document.getElementById("deleteContactResult").innerHTML =  contactFirstName + " " + contactLastName + " has been deleted";
 				}
 				
 			}
@@ -302,9 +299,9 @@ function deleteContactFromSearch(contactId, rowId)
 				//document.getElementById("deleteContactResult").innerHTML = "Contact has been deleted";
 
 				var jsonObject = JSON.parse( xhr.responseText );
-				var contactId = jsonObject.contactId;
-				var firstName = jsonObject.firstName;
-				var lastName = jsonObject.lastName;
+				contactId = jsonObject.contactId;
+				var contactFirstName = jsonObject.firstName;
+				var contactLastName = jsonObject.lastName;
 				
 				if( contactId < 1 )
 				{
@@ -315,7 +312,7 @@ function deleteContactFromSearch(contactId, rowId)
 				{
 					var table = document.getElementById("searchTable").getElementsByTagName("tbody")[0];
 					table.removeChild(document.getElementById(rowId));
-					document.getElementById("deleteContactResult").innerHTML =  firstName + " " + lastName + " has been deleted";
+					document.getElementById("deleteContactResult").innerHTML =  contactFirstName + " " + contactLastName + " has been deleted";
 				}
 				
 			}
@@ -338,14 +335,14 @@ function updateContactFromSearch(contactId, rowId)
 	var row = document.getElementById(rowId);
 	var cols = row.getElementsByTagName("td");
 
-	var firstName = cols[0].getElementsByTagName("input")[0].value;
-	var lastName = cols[1].getElementsByTagName("input")[0].value;
+	var contactFirstName = cols[0].getElementsByTagName("input")[0].value;
+	var contactLastName = cols[1].getElementsByTagName("input")[0].value;
 	var phoneNumber = cols[2].getElementsByTagName("input")[0].value;
 	var address = cols[3].getElementsByTagName("input")[0].value;
 	var email = cols[4].getElementsByTagName("input")[0].value;
 	var notes = cols[5].getElementsByTagName("input")[0].value;
 
-	var jsonPayload = '{"contactId" : "' + contactId + '", "userId" : "' + userId + '", "firstName" : "' + firstName + '", "lastName" : "' + lastName + '", "phoneNumber" : "' + phoneNumber + '", "email" : "' + email + '", "address" : "' + address + '", "notes" : "' + notes + '"}';
+	var jsonPayload = '{"contactId" : "' + contactId + '", "userId" : "' + userId + '", "firstName" : "' + contactFirstName + '", "lastName" : "' + contactLastName + '", "phoneNumber" : "' + phoneNumber + '", "email" : "' + email + '", "address" : "' + address + '", "notes" : "' + notes + '"}';
 
 	console.log(userId);
 	console.log(jsonPayload);
@@ -362,7 +359,7 @@ function updateContactFromSearch(contactId, rowId)
 			if (this.readyState == 4 && this.status == 200) 
 			{
 				var jsonObject = JSON.parse( xhr.responseText );
-				var contactId = jsonObject.contactId;
+				contactId = jsonObject.contactId;
 				
 				if( contactId < 1 )
 				{
@@ -395,7 +392,7 @@ function searchContact()
 	var name = document.getElementById("name").value;
 
 	var table;
-	var jsonPayload = '{"name" : "' + name + '", "userId" : "' + userId + '"}';;
+	var jsonPayload = '{"name" : "' + name + '", "userId" : "' + userId + '"}';
 
 	console.log(userId);
 	console.log(jsonPayload);
@@ -419,7 +416,7 @@ function searchContact()
 				var rowId = 0;
 				for(var i = searchResults.length - 1; i >= 0; i--)
 				{
-					contact = searchResults[i].split(" | ");
+					var contact = searchResults[i].split(" | ");
 					table = document.getElementById("searchTable").getElementsByTagName("tbody")[0];
 
 					var row = table.insertRow(0);
@@ -468,8 +465,8 @@ function updateContact()
 	readCookie();
 	
 	var contactId = document.getElementById("contactId").value;
-	var firstName = document.getElementById("firstName").value;
-	var lastName = document.getElementById("lastName").value;
+	var contactFirstName = document.getElementById("firstName").value;
+	var contactLastName = document.getElementById("lastName").value;
 	var phoneNumber = document.getElementById("phoneNumber").value;
 	var email = document.getElementById('email').value;
 	var address = document.getElementById('address').value;
@@ -477,7 +474,7 @@ function updateContact()
 
 	document.getElementById("updateContactResult").innerHTML = "";
 	
-	var jsonPayload = '{"contactId" : "' + contactId + '", "userId" : "' + userId + '", "firstName" : "' + firstName + '", "lastName" : "' + lastName + '", "phoneNumber" : "' + phoneNumber + '", "email" : "' + email + '", "address" : "' + address + '", "notes" : "' + notes + '"}';
+	var jsonPayload = '{"contactId" : "' + contactId + '", "userId" : "' + userId + '", "firstName" : "' + contactFirstName + '", "lastName" : "' + contactLastName + '", "phoneNumber" : "' + phoneNumber + '", "email" : "' + email + '", "address" : "' + address + '", "notes" : "' + notes + '"}';
 
 	console.log(userId);
 	console.log(jsonPayload);
@@ -494,7 +491,7 @@ function updateContact()
 			if (this.readyState == 4 && this.status == 200) 
 			{
 				var jsonObject = JSON.parse( xhr.responseText );
-				var contactId = jsonObject.contactId;
+				contactId = jsonObject.contactId;
 				
 				if( contactId < 1 )
 				{
