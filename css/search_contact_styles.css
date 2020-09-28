@@ -17,19 +17,20 @@
 }
 
 #returnButton{
-margin-bottom:10px;
+	margin-bottom:10px;
 }
 
 .jumbotron{
 	width:70%;
     height: 540px;
 	position: fixed;
-	top: 7%;
+  	top: 7%;
  	left: 50%;
     transform: translate(-50%, -50%);	
 	background-color: #E4EFF9;
 	margin-top: 290px;
-	margin-left: 0px;
+	margin-left: 0px;	
+
 }
 
 .textbox{

@@ -257,6 +257,7 @@ function deleteContactFromSearch(contactId, rowId) {
     try {
         xhr.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
+                //document.getElementById("deleteContactResult").innerHTML = "Contact has been deleted";
 
                 var jsonObject = JSON.parse(xhr.responseText);
                 contactId = jsonObject.contactId;
@@ -374,7 +375,7 @@ function searchContact() {
                     row.insertCell(0).innerHTML = '<button type="button" id="updateButton" class="btn" onclick="updateContactFromSearch(' +
                         contact[0] + ',' + rowId + ');">Update</button>';
 
-                    // Textfield inputs for each contact row.
+                    // Textfield inputs for each contact row.	
                     row.insertCell(0).innerHTML = '<input type="text" class="textField" id="ContactId" readonly>';
                     row.insertCell(0).innerHTML = '<input type="text" class="textField" id="notesField">';
                     row.insertCell(0).innerHTML = '<input type="text" class="textField" id="emailField">';

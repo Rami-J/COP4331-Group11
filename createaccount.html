@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en" xml:lang="en">
+<html>
    <head>
       <meta charset="UTF-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,7 +12,7 @@
    <body>
       <div class="container" id="container">
          <div class="jumbotron">
-            <img src="images/blue.jpg" alt="Card image cap">
+            <img src="images/blue.jpg">
             <div id="signUpDiv">
                <h4>SIGN UP</h4>
                <div class="textbox">
@@ -44,12 +43,12 @@
                <button type="button" id="signInButton" class="btn btn-default btn-lg" onclick="doSignUp();">Sign Up </button>
                <button type="button" id="returnButton" class="btn btn-default btn-lg">Return </button>
                <script type="text/javascript">
-                  document.getElementById("returnButton").onclick= function ()
+                  document.getElementById("returnButton").onclick= function () 
                   {
-					  location.href = "index.html";
+                  	location.href = "index.html";
                   };
                </script>
-               <span style="font-weight:bold" id="signInResult"></span>
+               <span style="font-weight:bold" id="signInResult"></span>	
             </div>
          </div>
       </div>

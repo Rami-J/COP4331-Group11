@@ -24,14 +24,14 @@
                <button type="button" id="searchContactButton" class="btn btn-default btn-lg" onclick="searchContact();buttonTimeout(this);">Search Contact</button>
                <button type="button" id="returnButton" class="btn btn-default btn-lg">Return to Dashboard</button>
                <script type="text/javascript">
-                  document.getElementById("returnButton").onclick= function ()
+                  document.getElementById("returnButton").onclick= function () 
                   {
-					  location.href = "dashboard.html";
+                  	location.href = "dashboard.html";
                   };
                </script>
-               <div class="myTable"style="background-size: cover;overflow-y:auto;overflow-x:auto;"">
-                  <table id="searchTable" class="myTable" aria-label=">Search Contact Results" style="background-image: url(images/blue_blur.jpg);display:none;">
-                     <captions</caption>
+               <div class="myTable"style="overflow-y:auto;overflow-x:auto;"">
+                  <table id="searchTable" class="myTable" aria-label=">Search Contact Results" style="background-image: url(images/blue_blur.jpg);background-size:cover;display:none;">
+                     <captions></captions>
                      <thead>
                         <tr>
                            <th class="th-sm" id="tableColumnFN">First Name
@@ -54,12 +54,12 @@
                            </th>
                         </tr>
                      </thead>
-                     <tbody>
+                     <tbody style="background-image: url(images/blue_blur.jpg);background-size:cover;">
                      </tbody>
                   </table>
                </div>
-               <span style="font-weight:bold" id="deleteContactResult"></span>
-               <span style="font-weight:bold" id="updateContactResult"></span>
+               <span style="font-weight:bold" id="deleteContactResult"></span>	
+               <span style="font-weight:bold" id="updateContactResult"></span>	
             </div>
          </div>
       </div>
