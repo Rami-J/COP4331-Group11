@@ -21,15 +21,15 @@ margin-bottom:10px;
 }
 
 .jumbotron{
-	width:60%;
-        height: 480px;
+	width:70%;
+    height: 540px;
 	position: fixed;
-  	top: 50%;
+	top: 7%;
  	left: 50%;
-        transform: translate(-50%, -50%);	
+    transform: translate(-50%, -50%);	
 	background-color: #E4EFF9;
-	margin: 0 auto;	
-
+	margin-top: 290px;
+	margin-left: 0px;
 }
 
 .textbox{
@@ -79,14 +79,17 @@ th{
 	width: 100%;
 }
 
-.mytable{
+table{
+	margin-top: 10px;
+}
+.myTable{
 	margin-top:15px;
 	display: block;
-	max-height: 30px;
+	height:27vh;
+	max-height: 240px;
 	width: 100%;
-	overflow-y: scroll;
+	overflow-y: visible;
 	overflow-x: visible;
-
 }
 .mytable::-webkit-scrollbar {
 		width: 20px;
@@ -95,6 +98,7 @@ th{
 .mytable::-webkit-scrollbar-track {
 	box-shadow: inset 0 0 5px #E4EFF9;
 	border-radius: 10px;
+	color:#354182;
 }
 	  
 .mytable::-webkit-scrollbar-thumb {
@@ -105,7 +109,8 @@ th{
 .th-sm{
 	border:4px solid;
 	border-color:#354182;
-	background-color: #E4EFF9;
+	background-color: #354182;
+	color: #E4EFF9;
 	width:14%;
 	text-align: center;
 }
@@ -113,7 +118,8 @@ th{
 .th-button{
 	border:4px solid;
 	border-color:#354182;
-	background-color: #E4EFF9;
+	background-color: #354182;
+	color: #E4EFF9;
 	width:14%;
 	text-align: center;
 }
@@ -126,8 +132,17 @@ th{
 .textField {
 	text-align: center;
 	border:2px solid;
+	width:100%;
 	background-color: #E4EFF9;
 	border-color: #354182;
 }
 
+@media only screen and (min-width: 1290px) {
 
+	.jumbotron {
+		position: fixed;
+		top: 15%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+}

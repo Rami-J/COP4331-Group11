@@ -32,7 +32,7 @@
 	else
 	{
 		// Send the query to the database
-		$sql = "SELECT * FROM Contact WHERE (CONCAT(firstName, ' ',lastName) LIKE '" . $name . "%'  OR CONCAT(lastName, ' ',firstName) LIKE '" . $name . "%') AND userId = '" . $userId . "'";
+		$sql = "SELECT * FROM Contact WHERE (CONCAT(firstName, ' ',lastName) LIKE '" . $name . "%'  OR CONCAT(lastName, ' ',firstName) LIKE '" . $name . "%') AND userId = '" . $userId . "' ORDER BY lastName";
 
 		$result = $connection->query($sql);
 		if( !$result )
