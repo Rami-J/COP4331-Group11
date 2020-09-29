@@ -54,7 +54,7 @@
 		else
 		{
 			$sql = "INSERT INTO User (firstName, lastName, login, password, dateCreated) VALUES ( '" . $firstName . "','" . $lastName . "','" . $login . "','" . $password . "',CURDATE())";
-			if( $result = $connection->query($sql) != TRUE )
+			if( !$result = $connection->query($sql))
 			{
 				$error = true;
 				returnError( $connection->error );
@@ -108,9 +108,7 @@
 		$string = trim($string);
 		$string = str_replace('"', '', $string);
 		$string = str_replace("'", '', $string);
-		$string = str_replace(';', '', $string);
-		return $string;
+		return str_replace(';', '', $string);
 	}
 
 ?>
-

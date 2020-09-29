@@ -91,8 +91,7 @@
 		$string = trim($string);
 		$string = str_replace('"', '', $string);
 		$string = str_replace("'", '', $string);
-		$string = str_replace(';', '', $string);
-		return $string;
+		return str_replace(';', '', $string);
 	}
 
 ?>
